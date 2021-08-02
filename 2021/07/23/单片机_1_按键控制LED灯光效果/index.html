@@ -40,7 +40,7 @@
 <p>(1)由电路图可知按键按下时,对应端口会变成<strong>低电平</strong></p>
 <p><img src="/images/image-20210724230225725.png" alt="image-20210724230225725"></p>
 <p>(2)两种获取按键状态的方式</p>
-<p>​    (1)中断方式</p>
+<p>​    (1)中断方式:  因为只能检测到两个独立按键, 在控制蜂鸣器时会用到,这次暂时先不用. </p>
 <p>​    (2)查询方式:  没有中断方式好用,因为需要不停的扫描端口电压, 而当程序在运行灯光效果时,是无法扫描端口的,就无法判断按键是否被按下过; (在按下按键的时间内, 程序没有运行到端口扫描的代码, 程序就不知道按键曾经被按下过)   解决方法看下面的代码, 我们需要一直按到LED全灭;</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(P3_0 == <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	P1 = <span class="number">0xFF</span>;	<span class="comment">/*告诉我们,程序已经知道有按键曾经按下过*/</span></span><br><span class="line">	<span class="keyword">while</span>(!P3_0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
